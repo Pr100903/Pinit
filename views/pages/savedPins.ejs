@@ -1,0 +1,16 @@
+<%- include('../partials/header') %>
+
+<h1>Saved Pins</h1>
+
+<div class="pins-grid">
+    <% user.savedPins.forEach(pin => { %>
+        <div class="pin">
+            <img src="/uploads/<%= pin.image %>" alt="<%= pin.title %>">
+            <div class="pin-content">
+                <h3 class="pin-title"><%= pin.title %></h3>
+            </div>
+        </div>
+    <% }); %>
+</div>
+
+<%- include('../partials/footer') %>

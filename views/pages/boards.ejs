@@ -1,0 +1,18 @@
+<%- include('../partials/header') %>
+
+<h1>Your Boards</h1>
+<a href="/boards/new" class="btn">New Board</a>
+
+<div class="pins-grid">
+    <% boards.forEach(board => { %>
+        <div class="pin">
+            <a href="/boards/<%= board._id %>">
+                <div class="pin-content">
+                    <h3 class="pin-title"><%= board.name %></h3>
+                </div>
+            </a>
+        </div>
+    <% }); %>
+</div>
+
+<%- include('../partials/footer') %>

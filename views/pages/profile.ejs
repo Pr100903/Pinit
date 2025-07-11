@@ -1,0 +1,174 @@
+<%- include('../partials/header') %>
+
+<div class="profile-section">
+  <div class="profile-header">
+    <img 
+      src="<%= user.profilePic ? '/uploads/profiles/' + user.profilePic : '/default-avatar.png' %>" 
+      alt="Profile Picture" 
+      class="profile-avatar"
+    >
+    <h1 class="profile-username"><%= user.username %></h1>
+
+    <!-- Auto-upload on file select -->
+    <form action="/users/upload-profile-pic" method="POST" enctype="multipart/form-data" class="upload-form">
+      <label class="upload-label">
+        Change Profile Photo
+        <input 
+          type="file" 
+          name="profilePic" 
+          accept="image/*" 
+          onchange="this.form.submit()"
+          class="upload-input"
+        />
+      </label>
+    </form>
+  </div>
+
+  <h2 class="section-title">Your Pins</h2>
+
+  <% if (pins.length === 0) { %>
+    <p class="no-pins-text">No pins uploaded yet.</p>
+  <% } else { %>
+    <div class="pins-grid">
+      <% pins.forEach(pin => { %>
+        <div class="pin">
+          <a href="/uploads/<%= pin.imageUrl %>" download>
+            <img src="/uploads/<%= pin.imageUrl %>" alt="<%= pin.title %>" class="pin-img" />
+          </a>
+          <div class="pin-content">
+            <h3 class="pin-title"><%= pin.title %></h3>
+          </div>
+          <form action="/pins/<%= pin._id %>/delete" method="POST" class="delete-form">
+            <button type="submit" class="delete-btn">🗑️</button>
+          </form>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>
+
+<style>
+  .profile-section {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+  }
+
+  .profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  .profile-avatar {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #e60023;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+  }
+
+  .profile-username {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 12px;
+  }
+
+  .upload-form {
+    margin-top: 10px;
+  }
+
+  .upload-label {
+    font-size: 0.95rem;
+    color: #e60023;
+    cursor: pointer;
+    padding: 8px 16px;
+    border: 1px solid #e60023;
+    border-radius: 20px;
+    display: inline-block;
+    transition: all 0.3s ease;
+  }
+
+  .upload-label:hover {
+    background-color: #e60023;
+    color: white;
+  }
+
+  .upload-input {
+    display: none;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    color: #444;
+    text-align: left;
+  }
+
+  .no-pins-text {
+    font-size: 1.1rem;
+    color: #777;
+  }
+
+  .pins-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+  }
+
+  .pin {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease-in-out;
+    position: relative;
+  }
+
+  .pin:hover {
+    transform: scale(1.03);
+  }
+
+  .pin-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+  }
+
+  .pin-content {
+    padding: 12px;
+    min-height: 80px;
+  }
+
+  .pin-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .delete-form {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .delete-btn {
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    cursor: pointer;
+    color: red;
+  }
+
+  .delete-btn:hover {
+    transform: scale(1.2);
+  }
+</style>

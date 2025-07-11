@@ -1,0 +1,25 @@
+<%- include('../partials/header') %>
+
+<div class="pins-container">
+    <h1 class="pins-header">Explore Pins</h1>
+
+    <% if (pins.length === 0) { %>
+        <p class="no-pins-message">No pins uploaded yet.</p>
+    <% } else { %>
+        <div class="pins-grid">
+            <% pins.forEach(pin => { %>
+                <div class="pin-card">
+                    <div class="pin-image-container">
+                        <img src="/uploads/<%= pin.imageUrl %>" alt="<%= pin.title %>" class="pin-image" />
+                    </div>
+                    <div class="pin-content">
+                        <h3 class="pin-title"><%= pin.title %></h3>
+                        <p class="pin-description"><%= pin.description %></p>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    <% } %>
+</div>
+
+<%- include('../partials/footer') %>

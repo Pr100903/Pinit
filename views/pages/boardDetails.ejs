@@ -1,0 +1,17 @@
+<%- include('../partials/header') %>
+
+<h1><%= board.name %></h1>
+
+<div class="pins-grid">
+    <% board.pins.forEach(pin => { %>
+        <div class="pin">
+            <img src="<%= pin.imageUrl %>" alt="<%= pin.title %>">
+            <div class="pin-content">
+                <h3 class="pin-title"><%= pin.title %></h3>
+                <p class="pin-description"><%= pin.description %></p>
+            </div>
+        </div>
+    <% }); %>
+</div>
+
+<%- include('../partials/footer') %>

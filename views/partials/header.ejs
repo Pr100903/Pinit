@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pinit</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      background-color: white;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .logo {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #e60023;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .logo i {
+      font-size: 2.2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: #333;
+      font-size: 1.1rem;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 24px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      background-color: #f0f0f0;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    .nav-links a i {
+      color: #e60023;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-links a:hover i {
+      transform: rotate(5deg);
+    }
+
+    .container {
+      margin-top: 32px;
+      background-color: #fafafa;
+      min-height: calc(100vh - 80px);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="/" class="logo">
+      <i class="fa-solid fa-thumbtack"></i> Pinit
+    </a>
+
+    <nav class="nav-links">
+      <a href="/"><i class="fa-solid fa-house"></i> Home</a>
+      <% if (user) { %>
+        <a href="/pins/new"><i class="fa-solid fa-circle-plus"></i> New Pin</a>
+        <a href="/boards/new"><i class="fa-solid fa-layer-group"></i> New Board</a>
+        <a href="/users/profile"><i class="fa-solid fa-user-circle"></i> Profile</a>
+        <a href="/auth/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+      <% } else { %>
+        <a href="/auth/login"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+        <a href="/auth/register"><i class="fa-solid fa-user-plus"></i> Register</a>
+      <% } %>
+    </nav>
+  </header>
